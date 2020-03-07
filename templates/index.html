@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+	<script src="{{ url_for('static', filename='js/jquery-3.4.1.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/predict.js') }}"></script>
+    <title>Credit card default prediction</title>
+  </head>
+  <body>
+     <div class="container">
+        <div class="py-5 text-center">
+          <img class="d-block mx-auto mb-4" src="/static/img/bank.jpg" alt="" width="72" height="72">
+          <h2>Credit card default prediction</h2>
+        </div>
+      
+        <div class="row">
+          <div class="col-md-12 order-md-1">
+            <form id="predict-form" action="{{ url_for('predict')}}"method="post" class="needs-validation">
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label for="age">Age</label>
+		              <input type="text" id="age" name="age" class="form-control" placeholder="Age" required/>
+                  <div class="invalid-feedback">
+                    Valid first name is required.
+                  </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="sex">Gender</label> 
+                  <select id="sex" name="sex" class="custom-select"> 
+                    <option value="2">Female</option> 
+                    <option value="1">Male</option>
+                  </select> 
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="marital_status">Marital status</label> 
+                  <select id="marital_status" name="marital_status" class="custom-select"> 
+                    <option value="1">Married</option> 
+                    <option value="2">Single</option>
+                    <option value="3">Others</option>
+                  </select>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="education_level">Education level</label> 
+                  <select id="education_level" name="education_level" class="custom-select"> 
+                    <option value="1">1-Graduate school</option> 
+                    <option value="2">2-University</option>
+                    <option value="3">3-High school</option>
+                    <option value="0">0-Others</option>
+                   </select> 
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="limit_balance">Amount of given credit</label>
+		              <input type="text" name="limit_balance" class="form-control" placeholder="0.00" required/>
+                </div>
+                <div class="w-100"></div>
+                <div class="col-md-6 mb-3">
+                  <label for="Repayment status">Repayment status:</label>
+                </div>
+                <div class="w-100"></div>
+                <div class="col-md-6 mb-3">
+                  <label for="pay_0">September</label> 
+                  <select id="pay_0" name="pay_0" class="custom-select"> 
+                    <option value="-2">payment 2 months earlier</option> 
+                    <option value="-1">payment 1 month earlier</option>
+                    <option value="0">payment on-time</option>
+                    <option value="1">payment delay for 1 month</option>
+                    <option value="2">payment delay for 2 months</option>
+                    <option value="3">payment delay for 3 months</option>
+                    <option value="4">payment delay for 4 months</option>
+                    <option value="5">payment delay for 5 months</option>
+                    <option value="6">payment delay for 6 months</option>
+                    <option value="7">payment delay for 7 months</option>
+                    <option value="8">payment delay for 8 months</option>
+                  </select> 
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="pay_2">August</label> 
+                  <select id="pay_2" name="pay_2" class="custom-select"> 
+                    <option value="-2">payment 2 months earlier</option> 
+                    <option value="-1">payment 1 month earlier</option>
+                    <option value="0">payment on-time</option>
+                    <option value="1">payment delay for 1 month</option>
+                    <option value="2">payment delay for 2 months</option>
+                    <option value="3">payment delay for 3 months</option>
+                    <option value="4">payment delay for 4 months</option>
+                    <option value="5">payment delay for 5 months</option>
+                    <option value="6">payment delay for 6 months</option>
+                    <option value="7">payment delay for 7 months</option>
+                    <option value="8">payment delay for 8 months</option>
+                  </select> 
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="pay_3">July</label> 
+                  <select id="pay_3" name="pay_3" class="custom-select"> 
+                    <option value="-2">payment 2 months earlier</option> 
+                    <option value="-1">payment 1 month earlier</option>
+                    <option value="0">payment on-time</option>
+                    <option value="1">payment delay for 1 month</option>
+                    <option value="2">payment delay for 2 months</option>
+                    <option value="3">payment delay for 3 months</option>
+                    <option value="4">payment delay for 4 months</option>
+                    <option value="5">payment delay for 5 months</option>
+                    <option value="6">payment delay for 6 months</option>
+                    <option value="7">payment delay for 7 months</option>
+                    <option value="8">payment delay for 8 months</option>
+                  </select> 
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="pay_4">June</label> 
+                  <select id="pay_4" name="pay_4" class="custom-select">  
+                    <option value="-2">payment 2 months earlier</option> 
+                    <option value="-1">payment 1 month earlier</option>
+                    <option value="0">payment on-time</option>
+                    <option value="1">payment delay for 1 month</option>
+                    <option value="2">payment delay for 2 months</option>
+                    <option value="3">payment delay for 3 months</option>
+                    <option value="4">payment delay for 4 months</option>
+                    <option value="5">payment delay for 5 months</option>
+                    <option value="6">payment delay for 6 months</option>
+                    <option value="7">payment delay for 7 months</option>
+                    <option value="8">payment delay for 8 months</option>
+                  </select> 
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="pay_5">May</label> 
+                  <select id="pay_5" name="pay_5" class="custom-select"> 
+                    <option value="-2">payment 2 months earlier</option> 
+                    <option value="-1">payment 1 month earlier</option>
+                    <option value="0">payment on-time</option>
+                    <option value="1">payment delay for 1 month</option>
+                    <option value="2">payment delay for 2 months</option>
+                    <option value="3">payment delay for 3 months</option>
+                    <option value="4">payment delay for 4 months</option>
+                    <option value="5">payment delay for 5 months</option>
+                    <option value="6">payment delay for 6 months</option>
+                    <option value="7">payment delay for 7 months</option>
+                    <option value="8">payment delay for 8 months</option>
+                  </select>	
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="pay_6">April</label> 
+                  <select id="pay_6" name="pay_6" class="custom-select"> 
+                    <option value="-2">payment 2 months earlier</option> 
+                    <option value="-1">payment 1 month earlier</option>
+                    <option value="0">payment on-time</option>
+                    <option value="1">payment delay for 1 month</option>
+                    <option value="2">payment delay for 2 months</option>
+                    <option value="3">payment delay for 3 months</option>
+                    <option value="4">payment delay for 4 months</option>
+                    <option value="5">payment delay for 5 months</option>
+                    <option value="6">payment delay for 6 months</option>
+                    <option value="7">payment delay for 7 months</option>
+                    <option value="8">payment delay for 8 months</option>
+                 </select>	
+                </div>
+				<div class="w-100"></div>
+                <div class="col-md-6 mb-3">
+                  <label for="Amount of previous payment">Amount of previous payment:</label>
+                </div>
+				<div class="w-100"></div>
+				<div class="col-md-6 mb-3">
+				  <label for="pay_amt_1">September</label>
+				  <input type="text" name="pay_amt_1" class="form-control" placeholder="0" required="required" />
+				</div>
+				<div class="col-md-6 mb-3">
+				  <label for="pay_amt_2">August</label>
+		          <input type="text" name="pay_amt_2" class="form-control" placeholder="0" required="required" />
+				</div>
+				<div class="col-md-6 mb-3">
+				  <label for="pay_amt_3">July</label>
+		          <input type="text" name="pay_amt_3" class="form-control" placeholder="0" required="required" />
+				</div>
+				<div class="col-md-6 mb-3">
+				  <label for="pay_amt_4">June</label>
+				  <input type="text" name="pay_amt_4" class="form-control" placeholder="0" required="required" />
+				</div>
+				<div class="col-md-6 mb-3">
+				  <label for="pay_amt_5">May</label>
+				  <input type="text" name="pay_amt_5" class="form-control" placeholder="0" required="required" />
+				</div>
+				<div class="col-md-6 mb-3">
+				  <label for="pay_amt_6">April</label>
+				  <input type="text" name="pay_amt_6" class="form-control" placeholder="0" required="required" />
+				</div>
+			    <div class="w-100"></div>
+                <div class="col-md-6 mb-3">
+                  <label for="Amount of bill statement">Amount of bill statement:</label>
+                </div>
+				<div class="w-100"></div>
+				<div class="col-md-6 mb-3">
+				  <label for="bill_amt_1">September</label>
+				  <input type="text" name="bill_amt_1" class="form-control" placeholder="0" required="required" />
+				</div>
+				<div class="col-md-6 mb-3">
+				  <label for="bill_amt_2">August</label>
+		          <input type="text" name="bill_amt_2" class="form-control" placeholder="0" required="required" />
+				</div>
+				<div class="col-md-6 mb-3">
+				  <label for="bill_amt_3">July</label>
+		          <input type="text" name="bill_amt_3" class="form-control" placeholder="0" required="required" />
+				</div>
+				<div class="col-md-6 mb-3">
+				  <label for="bill_amt_4">June</label>
+				  <input type="text" name="bill_amt_4" class="form-control" placeholder="0" required="required" />
+				</div>
+				<div class="col-md-6 mb-3">
+				  <label for="bill_amt_5">May</label>
+				  <input type="text" name="bill_amt_5" class="form-control" placeholder="0" required="required" />
+				</div>
+				<div class="col-md-6 mb-3">
+				  <label for="bill_amt_6">April</label>
+				  <input type="text" name="bill_amt_6" class="form-control" placeholder="0" required="required" />
+				</div>
+                <div class="w-100"></div>
+                <div class="col-md-12 mb-3">
+                  <hr class="mb-4">
+                  <button class="btn btn-primary btn-lg" type="submit">Predict</button>
+                </div>
+                <div class="w-100"></div>
+                <div class="col-md-12 mb-3">
+                  <div id="prediction-text" class="d-none alert alert-success" role="alert">
+                    {{ prediction_text }}
+                  </div>
+              </div>
+            </form>
+          </div>
+        </div>
+       </div>
+  </body>
+</html>
