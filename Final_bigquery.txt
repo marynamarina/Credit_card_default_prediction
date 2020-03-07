@@ -1,0 +1,15 @@
+SELECT pd.age, pd.sex, pd.marital_status, ei.education_level, cb.limit_balance, pi.pay_0, pi.pay_2, pi.pay_3, pi.pay_4, pi.pay_5, pi.pay_6, bi.bill_amt_1,	bi.bill_amt_2,	bi.bill_amt_3,	bi.bill_amt_4,	bi.bill_amt_5,	bi.bill_amt_6,  el.degree, dp.default_payment_next_month
+FROM `dev-rep-final-projects.credit_card_default.card_limit` as cb
+LEFT JOIN `dev-rep-final-projects.credit_card_default.personal_data` as pd
+ON cb.card_holder_id = pd.id
+LEFT JOIN `dev-rep-final-projects.credit_card_default.payment_info` as pi
+ON cb.card_holder_id = pi.id
+LEFT JOIN `dev-rep-final-projects.credit_card_default.default_payment_data` as dp
+ON cb.card_holder_id = dp.id
+LEFT JOIN `dev-rep-final-projects.credit_card_default.bill_info` as bi
+ON cb.card_holder_id = bi.id
+LEFT JOIN `dev-rep-final-projects.credit_card_default.education_info` as ei
+ON cb.card_holder_id = ei.id
+LEFT JOIN `dev-rep-final-projects.credit_card_default.education_labels` as el
+ON ei.education_level = el.id
+ORDER BY cb.card_holder_id ASC
